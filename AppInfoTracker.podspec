@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "AppInfoTracker"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "App information tracker for your iOS, OS X, and tvOS app"
 
   s.description  = <<-DESC
-
+                   AppInfoTracker
                    * Install versions history.
                    * Tell you is First launch for certain version or build or today.
                    * Tell you numbers of startups for app.
