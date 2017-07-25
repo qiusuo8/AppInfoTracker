@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  s.authors            = { "Zhao Zhihui" => "zhihui.zhao.jl@gmail.com" }
+  s.author            = { "Zhao Zhihui" => "zhihui.zhao.jl@gmail.com" }
   s.social_media_url   = "https://github.com/qiusuo8"
 
   s.ios.deployment_target = "8.0"
