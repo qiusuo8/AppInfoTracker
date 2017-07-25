@@ -58,6 +58,7 @@ public class AppInfoTracker {
         shared.startTracking()
     }
     
+    // MARK: - First Launch
     public static func isFirstLaunchForVersion(_ version: String, firstLaunchCompletion: FirstLaunchClosure? = nil) -> Bool {
         let currentVersion = AppInfoTracker.currentVersion()
         let count = numbersOfStartupsForVersion(version)
@@ -81,7 +82,16 @@ public class AppInfoTracker {
         return isFirstLaunch
     }
     
-    // MARK: - info
+    public class func isFirstLaunchForToday(firstLaunchCompletion: FirstLaunchClosure? = nil) -> Bool {
+        let count = numbersOfStartupsForToday()
+        let isFirstLaunch: Bool = (count == 1)
+        if let closure = firstLaunchCompletion, isFirstLaunch == true {
+            closure()
+        }
+        return isFirstLaunch
+    }
+    
+    // MARK: - Info
     public class func currentVersion() -> String {
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
         if let version = currentVersion as? String {
@@ -105,7 +115,7 @@ public class AppInfoTracker {
         return ""
     }
     
-    // MARK: - count of Start App
+    // MARK: - numbers of start app
     public class func numbersOfStartupsForVersion(_ version: String) -> Int {
         if let buildMap = shared.versionMap[version] {
             var sum = 0
@@ -174,7 +184,6 @@ extension AppInfoTracker {
         UserDefaults.standard.synchronize()
     }
     
-    // MARK: - number of startups for today
     fileprivate func updateFirstLaunchForToday() {
         if let num = dayLaunchMap[todayId] {
             dayLaunchMap[todayId] = num + 1
