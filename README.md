@@ -22,7 +22,7 @@ In your ApplicationDelegate, call the method `track` to track the current versio
 ```swift
 	// iOS / tvOS
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        VersionTracker.track()
+        AppInfoTracker.track()
         return true
     }
 ```
@@ -30,7 +30,7 @@ In your ApplicationDelegate, call the method `track` to track the current versio
 ```swift
 	// OS X
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        VersionTracker.track()
+        AppInfoTracker.track()
         return true        
     }
 
@@ -39,15 +39,31 @@ In your ApplicationDelegate, call the method `track` to track the current versio
 Then, call whenever one of the following methods to get the data you need:
 
 ```swift
-static func isFirstLaunchEver() -> Bool
-public static func isFirstLaunch(forVersion version: String = "", firstLaunch: FirstLaunch? = nil) -> Bool
-static func isFirstLaunch(forBuild build: String = "", firstLaunch: FirstLaunch? = nil) -> Bool
-static func currentVersion() -> String
-static func currentBuild() -> String
-static func previousVersion() -> String?
-static func previousBuild() -> String?
-static func versionHistory() -> [String]
-static func buildHistory() -> [String]
+isFirstLaunchOfToday: Bool
+isFirstLaunchForCurrentVersion: Bool
+isFirstLaunchForCurrentVersionAndBuild: Bool
+
+versionHistory: [String]
+
+public static func isFirstLaunchForVersion(_ version: String, firstLaunchCompletion: (() -> Void)? = nil) -> Bool
+
+public class func isFirstLaunchForVersion(_ version: String, build: String, firstLaunchCompletion: (() -> Void)? = nil) -> Bool
+
+public class func isFirstLaunchForToday(firstLaunchCompletion: (() -> Void)? = nil) -> Bool
+
+public class func currentVersion() -> String
+
+public class func previousVersion() -> String?
+
+public class func currentBuild() -> String
+
+public class func numbersOfStartupsForVersion(_ version: String) -> Int
+
+public class func numbersOfStartupsForVersion(_ version: String, build: String) -> Int
+
+public class func numbersOfStartupsForToday() -> Int
+
+
 ```
  
 ## Installation
