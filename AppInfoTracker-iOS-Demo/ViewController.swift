@@ -50,6 +50,9 @@ class ViewController: UIViewController {
         _ = AppInfoTracker.isFirstLaunchForToday {
             print("First launch for today")
         }
+        
+        print("-------------- launch times since installed --------------")
+        print(AppInfoTracker.numbersOfStartupsSinceInstalled())
     }
 
     override func didReceiveMemoryWarning() {
