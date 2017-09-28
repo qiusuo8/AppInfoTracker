@@ -142,6 +142,16 @@ public class AppInfoTracker {
         }
         return 0
     }
+    
+    public class func numbersOfStartupsSinceInstalled() -> Int {
+        var sum = 0
+        for (_, buildMap) in shared.versionMap {
+            for (_, value) in buildMap {
+                sum += value
+            }
+        }
+        return sum
+    }
 }
 
 extension AppInfoTracker {
@@ -154,6 +164,13 @@ extension AppInfoTracker {
         isFirstLaunchForCurrentVersionAndBuild = AppInfoTracker.isFirstLaunchForVersion(AppInfoTracker.currentVersion(), build: AppInfoTracker.currentBuild())
         
         isFirstLaunchOfToday = AppInfoTracker.numbersOfStartupsForToday() == 1
+        
+        if dayLaunchMap.count > 20 {
+            let keys = dayLaunchMap.keys.sorted()
+            for i in 0..<10 {
+                dayLaunchMap.removeValue(forKey: keys[i])
+            }
+        }
     }
     
     fileprivate func updateFirstLaunchForVersion() {
