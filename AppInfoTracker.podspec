@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AppInfoTracker"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "App information tracker for your iOS, OS X, and tvOS app"
 
   s.description  = <<-DESC
