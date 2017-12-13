@@ -1,0 +1,22 @@
+language: objective-c
+os: osx
+osx_image: xcode9
+
+env:
+  matrix:
+    - TEST_TYPE=iOS
+-before_install:
+ - |
+    gem install xcpretty -N --no-ri --no-rdoc
+script:
+- |
+    ./setup.sh
+    if [ "$TEST_TYPE" = iOS ]; then
+      set -o pipefail
+      xcodebuild clean test -workspace AppInfoTracker.xcworkspace -scheme AppInfoTracker -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.1' -enableCodeCoverage YES | xcpretty
+    fi
+after_success:
+    - sleep 5
+    - if [ "$TEST_TYPE" = iOS ]; then
+        bash <(curl -s https://codecov.io/bash)
+      fi
